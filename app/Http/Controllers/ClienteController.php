@@ -15,6 +15,7 @@ class ClienteController extends Controller
     public function index()
     {
         $clientes = Cliente::get();
+        
         return view('clientes/index', compact('clientes'));
     }
 
@@ -25,7 +26,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('clientes/cadastrarcliente');
+        
     }
 
     /**
@@ -36,41 +37,17 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
-
         try {
             $cliente = new Cliente;
  
-            $cliente->empresa_id = 1;
-            $cliente->tipo_pessoa = $request->tipo_pessoa;
-            $cliente->nome = $request->nome;
-            $cliente->email = $request->email;
-            $cliente->sexo = $request->sexo;
-            $cliente->documento = $request->documento;
+            $cliente->nomecompleto = $request->nomecompleto;
+            $cliente->cpf = $request->cpf;
             $cliente->rg = $request->rg;
-            $cliente->razao_social = $request->razao_social;
-            $cliente->inscricao_estadual = $request->inscricao_estadual;
-            $cliente->inscricao_municipal = $request->inscricao_municipal;
-            $cliente->tipo_contribuinte = $request->tipo_contribuinte;
-            $cliente->inscricao_suframa = $request->inscricao_suframa;
-            $cliente->data_nascimento = $request->data_nascimento;
-            $cliente->vencimento_cnh = $request->vencimento_cnh;
-            $cliente->observacoes = $request->observacoes;
-            $cliente->como_conheceu = $request->como_conheceu;
-            $cliente->restricao = $request->restricao;
-            $cliente->aviso_sms = $request->aviso_sms;
-            $cliente->aviso_email = $request->aviso_email;
-            $cliente->aniversario_sms = $request->aniversario_sms;
-            $cliente->aniversario_email = $request->aniversario_email;
+            $cliente->nascimento = $request->nascimento;
+
             $cliente->save();
 
             return response()->json(['success'=>true, 'message'=>'Cliente '.$cliente->nome.' cadastrado com sucesso.']);
-
-            /* if(isset($request->salvar_veiculo)){
-                return redirect()->route('veiculos.create')->with('msg', 'Cliente cadastrado com sucesso. Cadastre o veiculo!');
-            } else {
-                return redirect()->route('clientes.index')->with('msg', 'Cliente cadastrado com sucesso');
-            } */
 
         } catch (\Throwable $th) {
             return response()->json(['success'=>false, 'message'=>'Ocorreu algum erro ao cadastrar o cliente!']);
@@ -114,12 +91,8 @@ class ClienteController extends Controller
         try {
             $dados = $request->all();
             Cliente::findOrFail($id)->update($dados);
-
-            if(isset($request->salvar_veiculo)){
-                return redirect()->route('veiculos.create')->with('msg', 'Cliente '.$dados['nome'].' alterado com sucesso. Cadastre o veiculo!');
-            } else {
-                return redirect()->route('clientes.index')->with('msg', 'Cliente '.$dados['nome'].' alterado com sucesso');
-            }
+            
+            return redirect()->route('veiculos.create')->with('msg', 'Cliente '.$dados['nome'].' alterado com sucesso.');
 
         } catch (\Throwable $th) {
             throw $th;

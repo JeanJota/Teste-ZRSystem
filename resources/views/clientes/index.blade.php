@@ -85,41 +85,43 @@ Listar Clientes
               </div>
             </div>
             <div class="table-responsive scrollbar">
-
+              @if(count($clientes) > 0)
               <table class="table table-bordered table-striped fs--1 mb-0">
                 <thead class="bg-200 text-900">
                   <tr>
                     <th class="sort" data-sort="nome">Nome</th>
-                    <th class="sort" data-sort="cpf">CPF/CNPJ</th>
-                    <th class="sort" data-sort="celular">Contato</th>
+                    <th class="sort" data-sort="cpf">CPF</th>
+                    <th class="sort" data-sort="celular">Celular</th>
                     <th class="sort">Ações</th>
                   </tr>
                 </thead>
                 <tbody class="list">
+                  @foreach($clientes as $cliente)
 
 					<tr>
-						<td class="nome"></td>
-						<td class="cpf"></td>
-						<td class="contato"></td>
+						<td class="nome">{{ $cliente->nome }}</td>
+						<td class="cpf">{{ $cliente->documento }}</td>
+						<td class="celular">{{ $cliente->telefone }}</td>
 						<td>
-							<a href="">
+							<a href="{{ route('clientes.edit', $cliente->id) }}">
 								<i class="fas fa-edit" aria-hidden="true"></i>
 							</a>
 							| 
-							<a href="" class="deletar" id="">
+							<a href="{{ route('clientes.index') }}" class="deletar" id="{{ $cliente->id }}">
 								<span class="fas fa-trash text-danger"></span>
 							</a>						
 						<td>
-						<form id="delete-form-" action="" method="post">
-
+						<form id="delete-form-{{$cliente->id}}" action="{{route('clientes.destroy', $cliente->id)}}" method="post">
+							@csrf 
+							@method('DELETE')
 						</form>
 					</tr>
-
+                   @endforeach
                  </tbody>
                </table>
-
+               @else
                Nenhum cliente cadastrado
-
+               @endif
              </div>
              <div class="d-flex justify-content-center mt-3"><button class="btn btn-sm btn-falcon-default me-1" type="button" title="Anterior" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
               <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Próxima" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
