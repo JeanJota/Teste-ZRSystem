@@ -100,8 +100,6 @@ class ClienteController extends Controller
         try {
             $dados = $request->all();
             Cliente::findOrFail($id)->update($dados);
-            
-            return redirect()->route('veiculos.create')->with('msg', 'Cliente '.$dados['nome'].' alterado com sucesso.');
 
         } catch (\Throwable $th) {
             throw $th;
