@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nomecompleto');
             $table->string('rg')->nullable();
             $table->string('cpf');
-            $table->string('nascimento')->nullable();
+            $table->date('nascimento')->nullable();
             $table->string('estadocivil')->nullable();
             $table->string('contato')->nullable();
             $table->string('cep')->nullable();
