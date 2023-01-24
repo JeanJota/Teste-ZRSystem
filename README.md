@@ -45,4 +45,4 @@ php artisan key:generate
 
 
 Acesse o projeto
-[http://localhost:8989](http://localhost:8989)
+[http://localhost:8989/clientes/](http://localhost:8989/clientes/)

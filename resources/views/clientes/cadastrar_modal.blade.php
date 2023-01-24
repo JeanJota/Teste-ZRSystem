@@ -142,8 +142,8 @@
                         <div class="accordion-body">
                           <div class="row g-3">
                             <div class="col-md-6">
-                              <label class="form-label" for="celular">Contato (<span style="color: red;">*</span>)</label>
-                              <input class="form-control" id="celular" name="contato" type="text" required />
+                              <label class="form-label" for="contato">Contato (<span style="color: red;">*</span>)</label>
+                              <input class="form-control" id="contato" name="contato" type="text" required />
                               <div class="valid-feedback">Certo!</div>
                               <div class="invalid-feedback">Inválido!</div>
                             </div>                                                       

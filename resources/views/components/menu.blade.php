@@ -41,20 +41,7 @@
 
         </li>
 
-      </ul>
-      <div class="settings mb-3">
-        <div class="card shadow-none">
-          <div class="card-body alert mb-0" role="alert">
-            <div class="btn-close-falcon-container">
-              <button class="btn btn-link btn-close-falcon p-0" aria-label="Close" data-bs-dismiss="alert"></button>
-            </div>
-            <div class="text-center"><img src="{{ asset('assets/img/icons/spot-illustrations/navbar-vertical.png') }}" alt="" width="80" />
-              <p class="fs--2 mt-2">Quer mais comodidade? <br />Baixe agora o nosso app!</p>
-              <div class="d-grid"><a class="btn btn-sm btn-purchase" href="https://themes.getbootstrap.com/product/falcon-admin-dashboard-webapp-template/" target="_blank">Baixar</a></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </ul>      
     </div>
   </div>
 </nav>

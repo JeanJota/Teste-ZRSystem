@@ -90,8 +90,8 @@ Listar Clientes
                 <thead class="bg-200 text-900">
                   <tr>
                     <th class="sort" data-sort="nome">Nome</th>
-                    <th class="sort" data-sort="cpf">CPF</th>
-                    <th class="sort" data-sort="celular">Celular</th>
+                    <th class="sort" data-sort="cpf">CPF/CNPJ</th>
+                    <th class="sort" data-sort="celular">Contato</th>
                     <th class="sort">Ações</th>
                   </tr>
                 </thead>
@@ -100,7 +100,7 @@ Listar Clientes
 					<tr>
 						<td class="nome"></td>
 						<td class="cpf"></td>
-						<td class="celular"></td>
+						<td class="contato"></td>
 						<td>
 							<a href="">
 								<i class="fas fa-edit" aria-hidden="true"></i>

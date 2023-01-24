@@ -17,6 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/clientes', function () {
-    return view('clientes/index');
-});
+Route::resource('/clientes', App\Http\Controllers\ClienteController::class);
