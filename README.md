@@ -1,35 +1,3 @@
-
-# Setup Docker Para Projetos Laravel
-[Assine a Academy, e Seja VIP!](https://academy.especializati.com.br)
-
-### Passo a passo
-Clone Repositório
-```sh
-git clone https://github.com/especializati/setup-docker-laravel.git my-project
-```
-```sh
-cd my-project/
-```
-
-
-Alterne para a branch laravel 9.x
-```sh
-git checkout laravel-9-com-php-8
-```
-
-
-Remova o versionamento (opcional)
-```sh
-rm -rf .git/
-```
-
-
-Crie o Arquivo .env
-```sh
-cp .env.example .env
-```
-
-
 Atualize as variáveis de ambiente do arquivo .env
 ```dosini
 APP_NAME="Especializa Ti"
