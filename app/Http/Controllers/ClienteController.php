@@ -44,6 +44,15 @@ class ClienteController extends Controller
             $cliente->cpf = $request->cpf;
             $cliente->rg = $request->rg;
             $cliente->nascimento = $request->nascimento;
+            $cliente->estadocivil = $request->estadocivil;
+            $cliente->contato = $request->contato;
+            $cliente->cep = $request->cep;
+            $cliente->estado = $request->estado;
+            $cliente->cidade = $request->cidade;
+            $cliente->bairro = $request->bairro;
+            $cliente->endereco = $request->endereco;
+            $cliente->numero = $request->numero;
+            $cliente->complemento = $request->complemento;
 
             $cliente->save();
 
