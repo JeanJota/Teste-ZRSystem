@@ -1,35 +1,33 @@
 @extends("templates.app")
 
 @section("title")
-Listar Clientes 
+Listar Clientes
 @endsection
 
 @section("body")
 
 <script type="text/javascript">
-
-	$(document).ready(function(){
-		$(".deletar").click(function(event) {
-			event.preventDefault(); 
-			swal({
-				title: "Excluir",
-				text: "Tem certeza que deseja excluir este registro?",
-				icon: "warning",
-				buttons: true,
-				dangerMode: true,
-			}).then((willDelete) => {
-				if (willDelete) {
-					$(".loading-page").fadeIn("slow");
-					document.getElementById('delete-form-'+$(this).attr('id')).submit();
-					swal("Cliente excluído com sucesso", {
-						icon: "success",
-					});
-				}
-			});
-		});
-	});
-
-</script>	
+  $(document).ready(function() {
+    $(".deletar").click(function(event) {
+      event.preventDefault();
+      swal({
+        title: "Excluir",
+        text: "Tem certeza que deseja excluir este registro?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
+          $(".loading-page").fadeIn("slow");
+          document.getElementById('delete-form-' + $(this).attr('id')).submit();
+          swal("Cliente excluído com sucesso", {
+            icon: "success",
+          });
+        }
+      });
+    });
+  });
+</script>
 
 <!-- ===============================================-->
 <!--    Main Content-->
@@ -72,7 +70,7 @@ Listar Clientes
           </div>
         </div>
       </div>
-      <div class="card">          
+      <div class="card">
         <div class="card-body bg-light">
           <div id="tableExample3" data-list='{"valueNames":["nome","cpf","celular"],"page":10,"pagination":true}'>
             <div class="row justify-content-end g-0">
@@ -98,32 +96,32 @@ Listar Clientes
                 <tbody class="list">
                   @foreach($clientes as $cliente)
 
-					<tr>
-						<td class="nome">{{ $cliente->nome }}</td>
-						<td class="cpf">{{ $cliente->documento }}</td>
-						<td class="celular">{{ $cliente->telefone }}</td>
-						<td>
-							<a href="{{ route('clientes.edit', $cliente->id) }}">
-								<i class="fas fa-edit" aria-hidden="true"></i>
-							</a>
-							| 
-							<a href="{{ route('clientes.index') }}" class="deletar" id="{{ $cliente->id }}">
-								<span class="fas fa-trash text-danger"></span>
-							</a>						
-						<td>
-						<form id="delete-form-{{$cliente->id}}" action="{{route('clientes.destroy', $cliente->id)}}" method="post">
-							@csrf 
-							@method('DELETE')
-						</form>
-					</tr>
-                   @endforeach
-                 </tbody>
-               </table>
-               @else
-               Nenhum cliente cadastrado
-               @endif
-             </div>
-             <div class="d-flex justify-content-center mt-3"><button class="btn btn-sm btn-falcon-default me-1" type="button" title="Anterior" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                  <tr>
+                    <td class="nome">{{ $cliente->nome }}</td>
+                    <td class="cpf">{{ $cliente->documento }}</td>
+                    <td class="celular">{{ $cliente->telefone }}</td>
+                    <td>
+                      <a href="{{ route('clientes.edit', $cliente->id) }}">
+                        <i class="fas fa-edit" aria-hidden="true"></i>
+                      </a>
+                      |
+                      <a href="{{ route('clientes.index') }}" class="deletar" id="{{ $cliente->id }}">
+                        <span class="fas fa-trash text-danger"></span>
+                      </a>
+                    <td>
+                      <form id="delete-form-{{$cliente->id}}" action="{{route('clientes.destroy', $cliente->id)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                      </form>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+              @else
+              Nenhum cliente cadastrado
+              @endif
+            </div>
+            <div class="d-flex justify-content-center mt-3"><button class="btn btn-sm btn-falcon-default me-1" type="button" title="Anterior" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
               <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Próxima" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
             </div>
           </div>
@@ -132,7 +130,7 @@ Listar Clientes
 
       @include('components.footer')
 
-    </div>    
+    </div>
   </div>
 </main>
 

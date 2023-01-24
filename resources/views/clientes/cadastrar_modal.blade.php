@@ -2,51 +2,49 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 
 <script type="text/javascript">
+  $(document).ready(function() {
 
-  $(document).ready(function(){
-
-    $('#FormularioSubmit').on('submit', function(event){
+    $('#FormularioSubmit').on('submit', function(event) {
       event.preventDefault();
-	  $(".loading-page").fadeIn("slow");
+      $(".loading-page").fadeIn("slow");
       var url = $(this).attr('action');
 
-	  $.ajax({
+      $.ajax({
         url: url,
         method: 'POST',
         data: $(this).serialize(),
         dataType: 'JSON',
-        success: function(response){
-			$(".loading-page").fadeOut("slow");
-			//$('#FormularioSubmit').trigger("reset");
-			if(response.success){
-				swal({
-					title: "Ok",
-					text: response.message,
-					icon: "success"
-				}).then((willDelete) => {
-					$(".loading-page").fadeIn("slow");
-					location.href = parent.window.location;
-				});
-			} else {
-				swal({
-					title: "Info",
-					text: response.message,
-					icon: "error"
-				}).then((willDelete) => {
-					$(".loading-page").fadeIn("slow");
-					location.href = parent.window.location;
-				});
-			}
+        success: function(response) {
+          $(".loading-page").fadeOut("slow");
+          //$('#FormularioSubmit').trigger("reset");
+          if (response.success) {
+            swal({
+              title: "Ok",
+              text: response.message,
+              icon: "success"
+            }).then((willDelete) => {
+              $(".loading-page").fadeIn("slow");
+              location.href = parent.window.location;
+            });
+          } else {
+            swal({
+              title: "Info",
+              text: response.message,
+              icon: "error"
+            }).then((willDelete) => {
+              $(".loading-page").fadeIn("slow");
+              location.href = parent.window.location;
+            });
+          }
         },
         error: function(response) {
-			$(".loading-page").fadeIn("slow");
-			swal('Ocorreu um erro ao gravar o cliente. Tente novamente!');
+          $(".loading-page").fadeIn("slow");
+          swal('Ocorreu um erro ao gravar o cliente. Tente novamente!');
         }
       });
     });
 
-});
-
+  });
 </script>
 
 <div class="modal fade" id="cadastrar" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -79,7 +77,7 @@
               </div>
             </div>
             <div class="card-body bg-light">
-              <div class="tab-content">              
+              <div class="tab-content">
                 <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-9f3d91a9-02cb-40e0-8dcd-09a07aa45dc3" id="dom-9f3d91a9-02cb-40e0-8dcd-09a07aa45dc3">
                   <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
@@ -129,7 +127,7 @@
                               </select>
                               <div class="valid-feedback">Certo!</div>
                               <div class="invalid-feedback">Inválido!</div>
-                            </div>                
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -146,7 +144,7 @@
                               <input class="form-control" id="contato" name="contato" type="text" required />
                               <div class="valid-feedback">Certo!</div>
                               <div class="invalid-feedback">Inválido!</div>
-                            </div>                                                       
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -161,7 +159,7 @@
                             <p id="errocep" style="display: none;"></p>
                             <div class="col-md-3">
                               <label class="form-label" for="cep">CEP</label>
-                              <input class="form-control" id="cep" name="cep" type="text" placeholder="Buscar CEP" onclick="this.value=''" v-model="cep"  maxlength="8" />
+                              <input class="form-control" id="cep" name="cep" type="text" placeholder="Buscar CEP" onclick="this.value=''" v-model="cep" maxlength="8" />
                               <div class="valid-feedback">Certo!</div>
                               <div class="invalid-feedback">Inválido!</div>
                             </div>
@@ -200,11 +198,11 @@
                               <input class="form-control" id="complemento" name="complemento" type="text" />
                               <div class="valid-feedback">Certo!</div>
                               <div class="invalid-feedback">Inválido!</div>
-                            </div>  
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>                  
+                    </div>
                   </div>
                 </div>
               </div>
@@ -220,16 +218,14 @@
 <script>
   $("input[name='tipocliente']").click(function() {
 
-    if ($(this).prop('checked'))
-    {
+    if ($(this).prop('checked')) {
       $("#divempresa").hide();
 
       $('#tipocontribuinte').find('[value="2"]').attr('selected', false);
 
       $('#tipocontribuinte').find('[value="1"]').attr('selected', true);
 
-      if($(this).val() == 2)
-      {
+      if ($(this).val() == 2) {
         $("#divempresa").show();
 
         $('#tipocontribuinte').find('[value="1"]').attr('selected', false);
@@ -240,8 +236,7 @@
 
   });
 
-  function calculaniver(data)
-  {
+  function calculaniver(data) {
     const hoje = new Date();
 
     const nascimento = new Date(data);
@@ -268,48 +263,49 @@
       cidade: "",
       estado: "",
       cep: "",
-      error: "" },
+      error: ""
+    },
 
-      methods: {
-        getCity: function () {
-          var self = this;
-          $.getJSON("https://viacep.com.br/ws/" + this.cep + "/json", function (result) {
-            if ("erro" in result)
-            {
-              self.error = "CEP não encontrado! Insira manualmente o endereço";
-              self.endereco = "";
-              self.bairro = "";
-              self.cidade = "";
-              self.estado = "";
-              $("#errocep").show();
-              $("#errocep").text(self.error);
-            }
-            else
-            {
-              document.getElementById('estado').value = result.uf;
-              document.getElementById('cidade').value = result.localidade;
-              document.getElementById('bairro').value = result.bairro;
-              document.getElementById('endereco').value = result.logradouro;
-            }
-          });
-        } },
+    methods: {
+      getCity: function() {
+        var self = this;
+        $.getJSON("https://viacep.com.br/ws/" + this.cep + "/json", function(result) {
+          if ("erro" in result) {
+            self.error = "CEP não encontrado! Insira manualmente o endereço";
+            self.endereco = "";
+            self.bairro = "";
+            self.cidade = "";
+            self.estado = "";
+            $("#errocep").show();
+            $("#errocep").text(self.error);
+          } else {
+            document.getElementById('estado').value = result.uf;
+            document.getElementById('cidade').value = result.localidade;
+            document.getElementById('bairro').value = result.bairro;
+            document.getElementById('endereco').value = result.logradouro;
+          }
+        });
+      }
+    },
 
-        watch: {
-          cep: function () {
-            if (this.cep.length === 8) {
-              this.getCity();
-              this.error = "";
-              $("#errocep").hide();
-            }
-            if (this.cep.length < 8) {
-              this.city = "";
-              this.error = "Pesquisando...";
-              $("#errocep").show();
-              $("#errocep").text(this.error);
-            }
-          } },
+    watch: {
+      cep: function() {
+        if (this.cep.length === 8) {
+          this.getCity();
+          this.error = "";
+          $("#errocep").hide();
+        }
+        if (this.cep.length < 8) {
+          this.city = "";
+          this.error = "Pesquisando...";
+          $("#errocep").show();
+          $("#errocep").text(this.error);
+        }
+      }
+    },
 
-          mounted: function () {
-            this.getCity();
-          } });
-        </script>
+    mounted: function() {
+      this.getCity();
+    }
+  });
+</script>
